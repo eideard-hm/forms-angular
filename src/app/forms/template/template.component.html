@@ -1,0 +1,86 @@
+<div class="container">
+  <h1>Contact form</h1>
+  <div class="row">
+    <div class="col-8">
+      <form (ngSubmit)="save(contactForm)"
+            #contactForm="ngForm"
+            autocomplete="off">
+
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input type="text"
+                 class="form-control"
+                 id="name"
+                 name="name"
+                 [(ngModel)]="contactFormModel.name"
+                 required
+                 placeholder="Write a name"
+                 #name="ngModel">
+          <div class="alert alert-danger mt-2"
+               [hidden]="name.valid || name.pristine">
+            This field is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="checkAdult">Are you over 18 years of age ?</label>
+          <input type="checkbox"
+                 class="form-check-input"
+                 name="checkAdult"
+                 [(ngModel)]="contactFormModel.checkAdult"
+                 required
+                 id="checkAdult"
+                 #checkAdult="ngModel">
+          <div class="alert alert-danger mt-2"
+              [hidden]="checkAdult.valid || checkAdult.pristine">
+              This field is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="department">Deparment</label>
+          <select class="form-select form-select-sm"
+                  name="department"
+                  id="department"
+                  [(ngModel)]="contactFormModel.department">
+              <option selected>Select an option.</option>
+              <option value="marketing">Marketing</option>
+              <option value="sales">Sales</option>
+              <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="comment">Comentario</label>
+         <textarea class="form-control"
+                   name="comment"
+                   id="comment"
+                   placeholder="Write a comment"
+                   rows="3"
+                   [(ngModel)]="contactFormModel.comment"
+                   required
+                   #comment="ngModel"></textarea>
+          <div class="alert alert-danger mt-2"
+               [hidden]="comment.valid || comment.pristine">
+            This field is required
+          </div>
+        </div>
+
+        <div class="d-grid gap-2 col-4 float-end mt-3">
+          <button type="submit"
+                  class="btn btn-success btn-lg"
+                  [disabled]="contactForm.invalid">
+            Save
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="col-4">
+      <pre>
+        {{ contactForm.value | json }}
+      </pre>
+    </div>
+  </div>
+</div>
