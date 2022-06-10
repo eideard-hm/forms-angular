@@ -1,1 +1,94 @@
-<p>reactive works!</p>
+<div class="container">
+  <h1>Contact form</h1>
+  <div class="row">
+    <div class="col-8">
+      <form (ngSubmit)="save()"
+            [formGroup]="contactForm"
+            autocomplete="off">
+
+        <div class="form-group mb-2">
+          <label for="name">Nombre</label>
+          <input type="text"
+                 class="form-control"
+                 id="name"
+                 name="name"
+                 placeholder="Write a name"
+                 formControlName="name">
+          <span class="input-group-text"
+                *ngIf="contactFormControls['name']?.errors?.['minlength']?.actualLength">
+            Actual lenght {{ contactFormControls['name']?.errors?.['minlength']?.actualLength }}
+          </span>
+          <div class="alert alert-danger mt-2"
+              *ngIf="contactFormControls['name']?.touched && contactFormControls['name']?.errors">
+            <ng-container *ngIf="contactFormControls['name']?.errors?.['required']">
+              The field is required.
+            </ng-container>
+            <ng-container *ngIf="contactFormControls['name']?.errors?.['minlength']">
+              Name must be longer than {{ contactFormControls['name']?.errors?.['minlength'].requiredLength }}
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="form-group mb-2">
+          <label for="checkAdult">Are you over 18 years of age ?</label>
+          <input type="checkbox"
+                 class="form-check-input"
+                 name="checkAdult"
+                 id="checkAdult"
+                 formControlName="checkAdult">
+          <div class="alert alert-danger mt-2"
+               *ngIf="contactFormControls['checkAdult']?.touched && contactFormControls['checkAdult']?.errors">
+              <ng-container *ngIf="contactFormControls['checkAdult']?.errors?.['required']">
+                The field is required
+              </ng-container>
+          </div>
+        </div>
+
+        <div class="form-group mb-2">
+          <label for="department">Deparment</label>
+          <select class="form-select form-select-sm"
+                  name="department"
+                  id="department"
+                  formControlName="department">
+              <option value="" selected>Select an option.</option>
+              <option value="marketing">Marketing</option>
+              <option value="sales">Sales</option>
+              <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="comment">Comentario</label>
+         <textarea class="form-control"
+                   name="comment"
+                   id="comment"
+                   placeholder="Write a comment"
+                   rows="3"
+                   formControlName="comment"></textarea>
+          <div class="alert alert-danger mt-2"
+               *ngIf="contactFormControls['comment']?.touched && contactFormControls['comment']?.errors">
+               <ng-container *ngIf="contactFormControls['comment']?.errors?.['required']">
+                The field is required
+              </ng-container>
+          </div>
+        </div>
+
+        <div class="d-grid gap-2 col-4 float-end mt-3">
+          <button type="submit"
+                  class="btn btn-success btn-lg"
+                  [disabled]="contactForm.invalid">
+            Save
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="col-4">
+      <pre>
+        {{ contactForm.value | json }}
+      </pre>
+    </div>
+  </div>
+</div>
+

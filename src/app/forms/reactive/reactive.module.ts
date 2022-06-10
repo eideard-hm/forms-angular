@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ReactiveRoutingModule } from './reactive-routing.module';
 import { ReactiveComponent } from './reactive.component';
-
 
 @NgModule({
   declarations: [
@@ -11,7 +11,8 @@ import { ReactiveComponent } from './reactive.component';
   ],
   imports: [
     CommonModule,
-    ReactiveRoutingModule
+    ReactiveRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class ReactiveModule { }
