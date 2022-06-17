@@ -3,8 +3,16 @@ import { Routes, RouterModule } from '@angular/router'
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => import('./forms/forms.module').then(m => m.FormsModule)
+    path: 'form',
+    loadChildren: () => import('./forms/forms.module').then(m => m.FormsModule),
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  }, {
+    path: '**',
+    redirectTo: 'auth',
+    pathMatch: 'full'
   }
 ]
 
@@ -12,4 +20,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

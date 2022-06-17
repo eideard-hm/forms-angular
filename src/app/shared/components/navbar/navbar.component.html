@@ -1,12 +1,28 @@
 <nav class="nav nav-pills flex-column flex-sm-row">
   <a class="flex-sm-fill text-sm-center nav-link"
-     routerLink="template"
+     routerLink="./auth/login"
+     routerLinkActive="active">
+    Login
+  </a>
+  <a class="flex-sm-fill text-sm-center nav-link"
+     [routerLink]="['auth', 'register']"
+     routerLinkActive="active">
+    Register
+  </a>
+  <a class="flex-sm-fill text-sm-center nav-link"
+     routerLink="./form/template"
      routerLinkActive="active">
     Forms template
   </a>
   <a class="flex-sm-fill text-sm-center nav-link"
-     routerLink="reactive"
-     routerLinkActive="active">
+     routerLink="./form/reactive"
+     routerLinkActive="active"
+     [routerLinkActiveOptions]="{ exact: true }">
     Forms Reactive
+  </a>
+  <a class="flex-sm-fill text-sm-center nav-link"
+     [routerLink]="['form', 'reactive', 'switches']"
+     routerLinkActive="active">
+    Reactive Switch
   </a>
 </nav>
