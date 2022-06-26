@@ -1,1 +1,138 @@
-<p>register works!</p>
+<h2>Validaciones Reactivas</h2>
+<hr>
+
+<div class="row">
+  <div class="col">
+    <form autocomplete="off"
+          [formGroup]="registerForm"
+          (ngSubmit)="onSubmit()">
+      <!-- Nombre -->
+      <div class="mb-3 row">
+        <label for="nombre"
+               class="col-sm-3 col-form-label">
+            Nombre
+        </label>
+        <div class="col-sm-9">
+          <input type="text"
+                 class="form-control"
+                 id="nombre"
+                 placeholder="Nombre del usuario"
+                 formControlName="nombre">
+          <div class="text-form text-danger"
+                *ngIf="campoNoValido('nombre')">
+            Debe ser en formato Nombre y Apellido
+          </div>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label"
+               for="email">
+            Email
+        </label>
+        <div class="col-sm-9">
+          <input type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Email del usuario"
+                  formControlName="email">
+          <div class="text-form text-danger"
+               *ngIf="campoNoValido('email')">
+            El correo es obligatorio.
+           </div>
+        </div>
+      </div>
+
+      <!-- Username -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label"
+               for="username">
+          Username
+        </label>
+        <div class="col-sm-9">
+          <input type="text"
+                  class="form-control"
+                  id="username"
+                  placeholder="Username del usuario"
+                  formControlName="username">
+          <div class="text-form text-danger"
+               *ngIf="campoNoValido('username')">
+            El username no puede ser strider
+           </div>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label"
+               for="password">
+          Contraseña
+        </label>
+        <div class="col-sm-9">
+          <input type="password"
+                  class="form-control"
+                  id="password"
+                  placeholder="Contraseña de la cuenta"
+                  formControlName="password">
+          <div class="text-form text-danger"
+                *ngIf="campoNoValido('password')">
+            La contraseña debe de ser mayor a {{ fr['password']?.errors?.['minlength']?.requiredLength }} caracteres.
+          </div>
+        </div>
+      </div>
+
+      <!-- Password2 -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label"
+               for="password2">
+          Confirmar la contraseña
+        </label>
+        <div class="col-sm-9">
+          <input type="password"
+                  class="form-control"
+                  id="password2"
+                  placeholder="Confirmar la contraseña"
+                  formControlName="passwordConfirm">
+          <div class="text-form text-danger"
+               *ngIf="campoNoValido('passwordConfirm')">
+            Las contraseñas no sin iguales.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-primary float-end"
+                  type="submit"
+                  [disabled]="registerForm.invalid">
+            Guardar
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <p>Values:</p>
+    <pre>{{ registerForm.value | json }}</pre>
+  </div>
+
+  <div class="col">
+    <p>Valid:</p>
+    <pre>{{ registerForm.valid | json }}</pre>
+  </div>
+
+  <div class="col">
+    <p>Equal password:</p>
+    <pre>{{ registerForm.errors | json }}</pre>
+  </div>
+
+  <div class="col">
+    <p>Password Erros:</p>
+    <pre>{{ fr['password']?.errors | json }}</pre>
+  </div>
+</div>
